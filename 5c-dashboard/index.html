@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5C Network - Elite Accounts Control Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .light {
+            --background-base: #f8fafc;
+            --background-overlay: rgba(248, 250, 252, 0.90);
+            --text: #0F172A;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --border: #E2E8F0;
+        }
+        .dark {
+            --background-base: #0b0f19;
+            --background-overlay: rgba(11, 15, 25, 0.94);
+            --text: #F8FAFC;
+            --card-bg: rgba(17, 24, 39, 0.90);
+            --border: #1F2937;
+        }
+        body {
+            background-color: var(--background-base);
+            color: var(--text);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .bg-overlay-glass {
+            background-color: var(--background-overlay);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .custom-card {
+            background-color: var(--card-bg);
+            border-color: var(--border);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased relative">
+
+    <div class="bg-overlay-glass min-h-screen w-full relative z-10 pb-12">
+
+        <header class="border-b bg-white/80 dark:bg-[#111827]/80 border-slate-200 dark:border-slate-800 p-4 sticky top-0 z-50 shadow-xs backdrop-blur-md">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-3.5 self-start md:self-auto">
+                    <img src="5CImage.avif" alt="5C Network Logo" class="h-10 w-auto object-contain bg-white dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <div>
+                        <h1 class="text-xl font-black tracking-tight text-slate-900 dark:text-white">5C Network - Elite Accounts Control Dashboard</h1>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Enterprise Operations Portfolio Hub • 34 Accounts Tracked</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4 self-end md:self-auto">
+                    <nav class="flex bg-slate-200/60 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-300/40 dark:border-slate-700/40">
+                        <button onclick="switchTab('focus-deck')" id="btn-focus-deck" class="px-3.5 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all bg-[#0052CC] text-white shadow-xs">Client Focus Deck</button>
+                        <button onclick="switchTab('global-analytics')" id="btn-global-analytics" class="px-3.5 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Global Portfolio Charts</button>
+                        <button onclick="switchTab('master-ledger')" id="btn-master-ledger" class="px-3.5 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Master Ledger Table</button>
+                    </nav>
+
+                    <button id="themeToggle" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:ring-2 hover:ring-[#0052CC] cursor-pointer">
+                        <svg id="sunIcon" class="w-4 h-4 text-amber-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M6.343 6.343l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path></svg>
+                        <svg id="moonIcon" class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="custom-card border rounded-2xl p-5 shadow-xs">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Projected System Volume</p>
+                    <h3 class="text-3xl font-black mt-1.5 tracking-tight text-[#0052CC] dark:text-blue-400">93,201 <span class="text-xs font-normal text-slate-400">Cases</span></h3>
+                </div>
+                <div class="custom-card border rounded-2xl p-5 shadow-xs">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Invoiced (June)</p>
+                    <h3 class="text-3xl font-black mt-1.5 tracking-tight text-emerald-600 dark:text-emerald-400">₹1,17,04,489</h3>
+                </div>
+                <div class="custom-card border rounded-2xl p-5 shadow-xs">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Portfolio Outstanding</p>
+                    <h3 class="text-3xl font-black mt-1.5 tracking-tight text-rose-600 dark:text-rose-400">₹94,64,941</h3>
+                </div>
+            </section>
+
+            <div id="tab-focus-deck" class="tab-content space-y-6">
+                <section class="bg-gradient-to-br from-[#0052CC] to-[#0742A6] rounded-2xl p-6 text-white shadow-lg space-y-4">
+                    <div class="max-w-xl">
+                        <h4 class="text-base font-bold tracking-wider uppercase text-blue-100">🎯 Interactive Client Focus Deck</h4>
+                        <p class="text-xs text-blue-100/70 mt-1">Search below to filter or pick a client account manually from the dropdown options.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-3xl">
+                        <input type="text" id="clientSearch" placeholder="🔍 Type name to filter dropdown..." class="w-full bg-white/10 text-white placeholder-blue-200 border border-white/20 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white focus:text-slate-900 focus:placeholder-slate-400 transition-all">
+                        <select id="clientSelector" class="w-full bg-white text-slate-900 font-bold rounded-xl px-4 py-2.5 text-sm focus:outline-none cursor-pointer"></select>
+                    </div>
+                </section>
+
+                <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="custom-card border rounded-2xl p-5 shadow-xs">
+                        <span class="text-xs font-bold text-[#0052CC] dark:text-blue-400 uppercase tracking-wider">Operational Load</span>
+                        <h5 class="text-md font-bold mt-0.5 mb-3">July Projected Cases</h5>
+                        <div class="relative h-56"><canvas id="gaugeVol"></canvas></div>
+                    </div>
+                    <div class="custom-card border rounded-2xl p-5 shadow-xs">
+                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Revenue Stream</span>
+                        <h5 class="text-md font-bold mt-0.5 mb-3">June Invoiced Amount</h5>
+                        <div class="relative h-56"><canvas id="gaugeBill"></canvas></div>
+                    </div>
+                    <div class="custom-card border rounded-2xl p-5 shadow-xs">
+                        <span class="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider">Collection Risk</span>
+                        <h5 class="text-md font-bold mt-0.5 mb-3">Total Outstanding Balance</h5>
+                        <div class="relative h-56"><canvas id="gaugeRisk"></canvas></div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="tab-global-analytics" class="tab-content hidden space-y-6">
+                <div class="custom-card border rounded-2xl p-5 shadow-sm">
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Comparative Global Case Volume Matrix</h4>
+                        <p class="text-xs text-slate-400">Total projected operational volumes across all 34 monitored business portfolio locations.</p>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                        <div class="min-w-[1400px] h-80">
+                            <canvas id="allClientsVolumeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-card border rounded-2xl p-5 shadow-sm">
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">June Invoiced vs Outstanding Balance Breakdown</h4>
+                        <p class="text-xs text-slate-400">Financial distribution metrics chart pairing June invoices side-by-side with localized outstanding collection risk parameters.</p>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                        <div class="min-w-[1400px] h-80">
+                            <canvas id="allClientsFinancialChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-master-ledger" class="tab-content hidden">
+                <section class="custom-card border rounded-2xl shadow-xs overflow-hidden">
+                    <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/30">
+                        <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Master Portfolio Matrix Table</span>
+                        <span class="text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1 rounded-lg border border-slate-200 dark:border-slate-700">34 Active Profile Datasets</span>
+                    </div>
+                    <div class="overflow-x-auto max-h-[500px] overflow-y-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="sticky top-0 bg-white dark:bg-[#111827] shadow-xs z-10 border-b border-slate-200 dark:border-slate-800">
+                                <tr class="text-xs font-bold uppercase text-slate-400">
+                                    <th class="p-4">Account Name</th>
+                                    <th class="p-4 text-right">July Vol (Proj)</th>
+                                    <th class="p-4 text-right">June Invoiced</th>
+                                    <th class="p-4 text-right">Outstanding Balance</th>
+                                    <th class="p-4 text-center">Growth Classification</th>
+                                </tr>
+                            </thead>
+                            <tbody id="masterTableBody" class="text-sm divide-y divide-slate-100 dark:divide-slate-800/60"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const masterDataPool = [
+            { name: "Medanta Super Speciality Hospital, Lucknow", volume: 35588, billing: 922394, outstanding: 2852111, growth: "Sustainable Growth" },
+            { name: "Siddharth Group", volume: 8912, billing: 1146625, outstanding: 890158, growth: "Moderate Growth" },
+            { name: "Yashoda Group", volume: 10083, billing: 211340, outstanding: 766890, growth: "Moderate Growth" },
+            { name: "HealthMap Group", volume: 3852, billing: 898619, outstanding: 439769, growth: "Sustainable Growth" },
+            { name: "Jay Prabha Medanta Hospital, Patna", volume: 1500, billing: 1089328, outstanding: 428055, growth: "Sustainable Growth" },
+            { name: "AMRI Group", volume: 450, billing: 245000, outstanding: 391954, growth: "Stable" },
+            { name: "Medanta Bihar NMCH", volume: 1100, billing: 215600, outstanding: 315940, growth: "Sustainable Growth" },
+            { name: "Medanta - The Medicity", volume: 2200, billing: 211608, outstanding: 285465, growth: "Sustainable Growth" },
+            { name: "Bansal Group", volume: 418, billing: 79047, outstanding: 228785, growth: "Stable" },
+            { name: "Medicover Hospital, Hyderabad", volume: 12400, billing: 330077, outstanding: 212335, growth: "Moderate Growth" },
+            { name: "Medanta Bihar DMCH", volume: 1050, billing: 141820, outstanding: 211505, growth: "Sustainable Growth" },
+            { name: "Marengo Asia Hospital, Faridabad", volume: 4022, billing: 251490, outstanding: 118905, growth: "Sustainable Growth" },
+            { name: "Maxwell Teleradiology", volume: 1325, billing: 366467, outstanding: 1076017, growth: "Stable" },
+            { name: "Redtech Health Solution Pvt. Ltd.", volume: 3813, billing: 688862, outstanding: 97624, growth: "Sustainable Growth" },
+            { name: "Orbit Group", volume: 200, billing: 147973, outstanding: 97258, growth: "Moderate Growth" },
+            { name: "Neuberg Group", volume: 1558, billing: 142855, outstanding: 95545, growth: "Stable" },
+            { name: "Vijaya Group", volume: 2224, billing: 720123, outstanding: 88377, growth: "Sustainable Growth" },
+            { name: "Hyderabad Institute Of Oncology", volume: 1666, billing: 83175, outstanding: 79415, growth: "Stable" },
+            { name: "Yolo Healthcare", volume: 350, billing: 125000, outstanding: 77700, growth: "Stable" },
+            { name: "Manipal Group", volume: 500, billing: 94500, outstanding: 73572, growth: "Stable" },
+            { name: "Venkateshwar Hospital", volume: 3666, billing: 687925, outstanding: 69528, growth: "Stable" },
+            { name: "Sri Aurobindo Institute", volume: 600, billing: 225335, outstanding: 68099, growth: "Moderate Growth" },
+            { name: "Medall Health Care Pvt Ltd", volume: 1961, billing: 207432, outstanding: 59237, growth: "Stable" },
+            { name: "Usmanpura Imaging Centre", volume: 150, billing: 45000, outstanding: 54813, growth: "Stable" },
+            { name: "Acharya Vinoba Bhave Hospital", volume: 0, billing: 32000, outstanding: 53334, growth: "Stable" },
+            { name: "Virinchi People's Hospitals", volume: 250, billing: 18000, outstanding: 51796, growth: "Stable" },
+            { name: "SGD Diagnostics Center Pvt. Ltd.", volume: 310, billing: 18045, outstanding: 40873, growth: "Stable" },
+            { name: "Nishkam Imaging Solutions Pvt. Ltd", volume: 256, billing: 118000, outstanding: 40823, growth: "Moderate Growth" },
+            { name: "Pioneer Diagnostic Center", volume: 480, billing: 275219, outstanding: 0, growth: "Stable" },
+            { name: "Tide Diagnostics", volume: 550, billing: 131425, outstanding: 0, growth: "Sustainable Growth" },
+            { name: "Jupiter Lifeline Hospital", volume: 390, billing: 49483, outstanding: 0, growth: "Stable" },
+            { name: "Chandan Group", volume: 1450, billing: 112000, outstanding: 0, growth: "Moderate Growth" },
+            { name: "Apollo Group Liaison", volume: 0, billing: 0, outstanding: 0, growth: "Stable" },
+            { name: "AIG Hospitals Elite Segment", volume: 0, billing: 0, outstanding: 0, growth: "Stable" }
+        ];
+
+        function formatCurrency(val) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(val);
+        }
+
+        const selector = document.getElementById('clientSelector');
+        const searchInput = document.getElementById('clientSearch');
+        const tableBody = document.getElementById('masterTableBody');
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            const buttons = ['focus-deck', 'global-analytics', 'master-ledger'];
+            buttons.forEach(b => {
+                const btn = document.getElementById(`btn-${b}`);
+                if (b === tabId) {
+                    btn.className = "px-3.5 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all bg-[#0052CC] text-white shadow-xs";
+                } else {
+                    btn.className = "px-3.5 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+                }
+            });
+
+            if(tabId === 'global-analytics') { renderAllClientsGlobalCharts(); }
+        }
+
+        function populateSelector(filteredList = masterDataPool) {
+            selector.innerHTML = filteredList.map(c => {
+                const trueIdx = masterDataPool.findIndex(item => item.name === c.name);
+                return `<option value="${trueIdx}">${c.name}</option>`;
+            }).join('');
+            if(filteredList.length > 0) {
+                const initialTrueIdx = masterDataPool.findIndex(item => item.name === filteredList[0].name);
+                updateGauges(initialTrueIdx);
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const matches = masterDataPool.filter(c => c.name.toLowerCase().includes(query));
+            populateSelector(matches);
+        });
+
+        tableBody.innerHTML = masterDataPool.map(c => `
+            <tr class="hover:bg-slate-100/60 dark:hover:bg-slate-800/40 transition-colors">
+                <td class="p-4 font-semibold text-slate-800 dark:text-slate-200">${c.name}</td>
+                <td class="p-4 text-right font-medium">${c.volume.toLocaleString('en-IN')}</td>
+                <td class="p-4 text-right text-emerald-600 font-semibold">${formatCurrency(c.billing)}</td>
+                <td class="p-4 text-right text-rose-600 font-bold">${formatCurrency(c.outstanding)}</td>
+                <td class="p-4 text-center"><span class="px-2.5 py-0.5 text-xs font-bold rounded-full ${c.growth === 'Sustainable Growth' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400' : 'bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400'}">${c.growth}</span></td>
+            </tr>
+        `).join('');
+
+        let gV, gB, gR, globalVolChartInstance, globalFinChartInstance;
+
+        function updateGauges(index) {
+            const data = masterDataPool[index];
+            const isDark = document.documentElement.classList.contains('dark');
+            const textClr = isDark ? '#94A3B8' : '#475569';
+            const gridClr = isDark ? 'rgba(31, 41, 55, 0.5)' : 'rgba(226, 232, 240, 0.8)';
+
+            if(gV) gV.destroy(); if(gB) gB.destroy(); if(gR) gR.destroy();
+
+            gV = new Chart(document.getElementById('gaugeVol').getContext('2d'), {
+                type: 'bar',
+                data: { labels: ['Cases'], datasets: [{ data: [data.volume], backgroundColor: '#0052CC', barThickness: 32 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: textClr }, grid: { display: false } }, y: { min: 0, max: 40000, ticks: { color: textClr }, grid: { color: gridClr } } } }
+            });
+
+            gB = new Chart(document.getElementById('gaugeBill').getContext('2d'), {
+                type: 'bar',
+                data: { labels: ['Revenue'], datasets: [{ data: [data.billing], backgroundColor: '#10B981', barThickness: 32 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: textClr }, grid: { display: false } }, y: { min: 0, max: 2500000, ticks: { color: textClr }, grid: { color: gridClr } } } }
+            });
+
+            gR = new Chart(document.getElementById('gaugeRisk').getContext('2d'), {
+                type: 'bar',
+                data: { labels: ['Outstanding'], datasets: [{ data: [data.outstanding], backgroundColor: '#F43F5E', barThickness: 32 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: textClr }, grid: { display: false } }, y: { min: 0, max: 3000000, ticks: { color: textClr }, grid: { color: gridClr } } } }
+            });
+        }
+
+        function renderAllClientsGlobalCharts() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const textClr = isDark ? '#94A3B8' : '#475569';
+            const gridClr = isDark ? 'rgba(31, 41,55, 0.5)' : 'rgba(226, 232, 240, 0.8)';
+
+            const labels = masterDataPool.map(c => c.name.length > 25 ? c.name.substring(0, 22) + '...' : c.name);
+            const volumeData = masterDataPool.map(c => c.volume);
+            const billingData = masterDataPool.map(c => c.billing);
+            const outstandingData = masterDataPool.map(c => c.outstanding);
+
+            if(globalVolChartInstance) globalVolChartInstance.destroy();
+            if(globalFinChartInstance) globalFinChartInstance.destroy();
+
+            globalVolChartInstance = new Chart(document.getElementById('allClientsVolumeChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{ label: 'Projected July Volume', data: volumeData, backgroundColor: '#0052CC', borderRadius: 4 }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: textClr } } },
+                    scales: {
+                        x: { ticks: { color: textClr, font: { size: 10 } }, grid: { display: false } },
+                        y: { ticks: { color: textClr }, grid: { color: gridClr } }
+                    }
+                }
+            });
+
+            globalFinChartInstance = new Chart(document.getElementById('allClientsFinancialChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'June Invoiced Base', data: billingData, backgroundColor: '#10B981', borderRadius: 4 },
+                        { label: 'Active Outstanding Exposure', data: outstandingData, backgroundColor: '#F43F5E', borderRadius: 4 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: textClr } } },
+                    scales: {
+                        x: { ticks: { color: textClr, font: { size: 10 } }, grid: { display: false } },
+                        y: { ticks: { color: textClr }, grid: { color: gridClr } }
+                    }
+                }
+            });
+        }
+
+        selector.addEventListener('change', (e) => { updateGauges(e.target.value); });
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const htmlEl = document.documentElement;
+            htmlEl.classList.toggle('dark');
+            htmlEl.classList.toggle('light');
+            
+            const isDark = htmlEl.classList.contains('dark');
+            document.getElementById('sunIcon').classList.toggle('hidden', !isDark);
+            document.getElementById('moonIcon').classList.toggle('hidden', isDark);
+            
+            updateGauges(selector.value);
+            if (!document.getElementById('tab-global-analytics').classList.contains('hidden')) {
+                renderAllClientsGlobalCharts();
+            }
+        });
+
+        populateSelector();
+    </script>
+</body>
+</html>
