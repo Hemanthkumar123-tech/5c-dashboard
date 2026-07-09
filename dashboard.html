@@ -366,7 +366,7 @@
                 document.getElementById('loadingOverlay').classList.remove('hidden');
                 runCloudMatrixDataPipeline();
                 
-                // Initialize background automatic refreshing every 5 minutes (300000ms)
+                // Automatic background reload loop tracking every 5 minutes (300000 ms)
                 setInterval(() => {
                     console.log("Automatic Data Synchronization Executing...");
                     runCloudMatrixDataPipeline(true); 
@@ -399,11 +399,11 @@
 
         function buildStatusBadge(cellValue) {
             if (!cellValue) return '';
-            const val = cellValue.trim().toUpperCase();
+            const val = cellValue.toString().trim().toUpperCase();
             if (val === 'WO') return `<span class="badge-wo">WO</span>`;
             if (val === 'CV') return `<span class="badge-cv">CV</span>`;
-            if (val === 'LEAVE') return `<span class="badge-leave">Leave</span>`;
-            if (val === 'CO') return `<span class="badge-co">CO</span>`;
+            if (val.includes('LEAVE')) return `<span class="badge-leave">Leave</span>`;
+            if (val === 'CO' || val.includes('COMP')) return `<span class="badge-co">CO</span>`;
             return cellValue;
         }
 
@@ -427,6 +427,7 @@
                 const data3 = await res3.json();
                 const data4 = await res4.json();
 
+                // Process Sheet 1 (Master Ledger)
                 originalSheet1Pool = data1.map(e => ({
                     name: e.client_name || "Unknown Provider Hub",
                     volume: Number(e.case_load) || 0,
@@ -448,6 +449,7 @@
                     techit: `${e.technical_head_name || 'N/A'} / IT: ${e.it_head_name || 'N/A'}`
                 }));
 
+                // Process Sheet 2 (Rework Audits)
                 originalSheet2Pool = data2.map(e => ({
                     clientName: e.client_name || "Unknown Center",
                     caseNum: e.case_number || "CN-UNKNOWN",
@@ -461,34 +463,51 @@
                     severity: e.severity_level || "Low"
                 }));
 
-                originalSheet3Pool = data3.map(e => ({
-                    team: e.Team || e.team || "Elite",
-                    empId: e["Emp ID"] || e.emp_id || "-",
-                    empName: e["Employee Name"] || e.employee_name || "Unknown",
-                    d0525: e["05-25"] || "", d0526: e["05-26"] || "", d0527: e["05-27"] || "", d0528: e["05-28"] || "", d0529: e["05-29"] || "", d0530: e["05-30"] || "", d0531: e["05-31"] || "",
-                    d0601: e["06-01"] || "", d0602: e["06-02"] || "", d0603: e["06-03"] || "", d0604: e["06-04"] || "", d0605: e["06-05"] || "", d0606: e["06-06"] || "", d0607: e["06-07"] || "",
-                    d0608: e["06-08"] || "", d0609: e["06-09"] || "", d0610: e["06-10"] || "", d0611: e["06-11"] || "", d0612: e["06-12"] || "", d0613: e["06-13"] || "", d0614: e["06-14"] || "",
-                    d0615: e["06-15"] || "", d0616: e["06-16"] || "", d0617: e["06-17"] || "", d0618: e["06-18"] || "", d0619: e["06-19"] || "", d0620: e["06-20"] || "", d0621: e["06-21"] || "",
-                    d0622: e["06-22"] || "", d0623: e["06-23"] || "", d0624: e["06-24"] || "",
-                    wo: Number(e.WO) || Number(e.wo) || 0,
-                    leave: Number(e.Leave) || Number(e.leave) || 0,
-                    lop: Number(e.LOP) || Number(e.lop) || 0,
-                    doublePay: Number(e["Double Pay"]) || Number(e.double_pay) || 0
-                }));
+                // Process Sheet 3 (Attendance Grid) - Dynamic Multi-header Skimming
+                originalSheet3Pool = data3.slice(1).map(e => {
+                    let teamVal = e["Team"] || e["Unnamed: 0"] || "Elite";
+                    let empIdVal = e["Emp ID"] || e["Unnamed: 1"] || "-";
+                    let empNameVal = e["Emp Name"] || e["Unnamed: 2"] || "";
 
-                originalSheet4Pool = data4.map(e => ({
-                    team: e.Team || e.team || "Elite",
-                    empId: e["Emp ID"] || e.emp_id || "-",
-                    empName: e["Employee Name"] || e.employee_name || "Unknown",
-                    nightShifts: Number(e["Night Shifts"]) || Number(e.night_shifts) || 0,
-                    nightAmount: Number(e["Night Amount"]) || Number(e.night_amount) || 0,
-                    sundayShifts: Number(e["Sunday Shifts"]) || Number(e.sunday_shifts) || 0,
-                    sundayAmount: Number(e["Sunday Amount"]) || Number(e.sunday_amount) || 0,
-                    grandAllowance: Number(e["Grand Allowance"]) || Number(e.grand_allowance) || 0,
-                    otHours: Number(e["OT Hours"]) || Number(e.ot_hours) || 0,
-                    otPayout: Number(e["OT Payout"]) || Number(e.ot_payout) || 0,
-                    finalGrandTotal: Number(e["Final Grand Total"]) || Number(e.final_grand_total) || 0
-                }));
+                    let woVal = Number(e["WO"]) || 0;
+                    let leaveVal = Number(e["Leave"]) || 0;
+                    let lopVal = Number(e["LOP"]) || 0;
+                    let doublePayVal = Number(e["Double Pay"]) || 0;
+
+                    const getDateStr = (day) => {
+                        let matchingKey = Object.keys(e).find(k => k.includes(day));
+                        return matchingKey ? e[matchingKey] : "";
+                    };
+
+                    return {
+                        team: teamVal === "Team" ? "Elite" : teamVal,
+                        empId: empIdVal === "Emp ID" ? "-" : empIdVal,
+                        empName: empNameVal,
+                        d0525: getDateStr("05-25"), d0526: getDateStr("05-26"), d0527: getDateStr("05-27"), d0528: getDateStr("05-28"), d0529: getDateStr("05-29"), d0530: getDateStr("05-30"), d0531: getDateStr("05-31"),
+                        d0601: getDateStr("06-01"), d0602: getDateStr("06-02"), d0603: getDateStr("06-03"), d0604: getDateStr("06-04"), d0605: getDateStr("06-05"), d0606: getDateStr("06-06"), d0607: getDateStr("06-07"),
+                        d0608: getDateStr("06-08"), d0609: getDateStr("06-09"), d0610: getDateStr("06-10"), d0611: getDateStr("06-11"), d0612: getDateStr("06-12"), d0613: getDateStr("06-13"), d0614: getDateStr("06-14"),
+                        d0615: getDateStr("06-15"), d0616: getDateStr("06-16"), d0617: getDateStr("06-17"), d0618: getDateStr("06-18"), d0619: getDateStr("06-19"), d0620: getDateStr("06-20"), d0621: getDateStr("06-21"),
+                        d0622: getDateStr("06-22"), d0623: getDateStr("06-23"), d0624: getDateStr("06-24"),
+                        wo: woVal, leave: leaveVal, lop: lopVal, doublePay: doublePayVal
+                    };
+                }).filter(i => i.empName && i.empId !== "-" && !i.team.includes("Team") && !i.empName.includes("Grand Total"));
+
+                // Process Sheet 4 (Allowances Matrix) - Structural Skimming Index Shifts
+                originalSheet4Pool = data4.slice(2).map(e => {
+                    return {
+                        team: e["Unnamed: 0"] || "Elite",
+                        empId: e["Unnamed: 1"] || "-",
+                        empName: e["Unnamed: 2"] || "Unknown",
+                        nightShifts: Number(e["Unnamed: 3"]) || 0,
+                        nightAmount: Number(e["Unnamed: 4"]) || 0,
+                        sundayShifts: Number(e["Unnamed: 5"]) || 0,
+                        sundayAmount: Number(e["Unnamed: 6"]) || 0,
+                        grandAllowance: Number(e["Unnamed: 7"]) || 0,
+                        otHours: Number(e["Unnamed: 8"]) || 0,
+                        otPayout: Number(e["Unnamed: 9"]) || 0,
+                        finalGrandTotal: Number(e["Unnamed: 10"]) || 0
+                    };
+                }).filter(i => i.empName && i.empId !== "-" && !i.team.includes("Team") && !i.empName.includes("Unknown") && !i.empName.includes("Grand Total"));
 
                 document.getElementById('loadingOverlay').classList.add('hidden');
                 resetDataFilterPools();
@@ -498,7 +517,7 @@
                 document.getElementById('loadingOverlay').innerHTML = `
                     <div class='text-center p-6 text-rose-400 font-mono text-xs border border-rose-900/60 bg-slate-950/90 max-w-md rounded-xl shadow-2xl'>
                         <p class='font-bold text-sm text-rose-500 uppercase tracking-wider mb-2'>Corporate Firewall Warning</p>
-                        <p class='mb-4 text-slate-400 leading-relaxed text-[11px]'>Network dropped package stream. Check public settings.</p>
+                        <p class='mb-4 text-slate-400 leading-relaxed text-[11px]'>Network dropped package stream or sheet access configurations are restricted.</p>
                     </div>`;
             }
         }
@@ -564,7 +583,6 @@
             generateSheet2ReworkTableRows();
             calculateSheet2SummaryCountersBlock();
             
-            // Generate Sheets 3 and Sheet 4 Rows
             generateSheet3AttendanceTableRows();
             generateSheet4AllowanceTableRows();
         }
@@ -649,7 +667,7 @@
                 
                 return `
                     <tr class="hover:bg-slate-900/40 transition-colors">
-                        <td class="p-3">${a.team}</td>
+                        <td class="p-3 font-semibold text-slate-400">${a.team || 'Elite'}</td>
                         <td class="p-3 font-bold text-cyan-400">${a.empId}</td>
                         <td class="p-3 text-white font-bold">${a.empName}</td>
                         <td class="p-2">${buildStatusBadge(a.d0525)}</td><td class="p-2">${buildStatusBadge(a.d0526)}</td><td class="p-2">${buildStatusBadge(a.d0527)}</td><td class="p-2">${buildStatusBadge(a.d0528)}</td><td class="p-2">${buildStatusBadge(a.d0529)}</td><td class="p-2">${buildStatusBadge(a.d0530)}</td><td class="p-2">${buildStatusBadge(a.d0531)}</td>
@@ -657,18 +675,18 @@
                         <td class="p-2">${buildStatusBadge(a.d0608)}</td><td class="p-2">${buildStatusBadge(a.d0609)}</td><td class="p-2">${buildStatusBadge(a.d0610)}</td><td class="p-2">${buildStatusBadge(a.d0611)}</td><td class="p-2">${buildStatusBadge(a.d0612)}</td><td class="p-2">${buildStatusBadge(a.d0613)}</td><td class="p-2">${buildStatusBadge(a.d0614)}</td>
                         <td class="p-2">${buildStatusBadge(a.d0615)}</td><td class="p-2">${buildStatusBadge(a.d0616)}</td><td class="p-2">${buildStatusBadge(a.d0617)}</td><td class="p-2">${buildStatusBadge(a.d0618)}</td><td class="p-2">${buildStatusBadge(a.d0619)}</td><td class="p-2">${buildStatusBadge(a.d0620)}</td><td class="p-2">${buildStatusBadge(a.d0621)}</td>
                         <td class="p-2">${buildStatusBadge(a.d0622)}</td><td class="p-2">${buildStatusBadge(a.d0623)}</td><td class="p-2">${buildStatusBadge(a.d0624)}</td>
-                        <td class="p-3 text-right text-purple-400 font-bold">${a.wo.toFixed(1)}</td>
-                        <td class="p-3 text-right ${a.leave > 0 ? 'text-rose-500 font-black' : 'text-emerald-400'}">${a.leave.toFixed(1)}</td>
-                        <td class="p-3 text-right text-slate-500">${a.lop.toFixed(1)}</td>
-                        <td class="p-3 text-right text-cyan-400 ${a.doublePay > 0 ? 'font-black' : ''}">${a.doublePay.toFixed(1)}</td>
+                        <td class="p-3 text-right text-purple-400 font-bold">${a.wo}</td>
+                        <td class="p-3 text-right ${a.leave > 0 ? 'text-rose-500 font-black' : 'text-emerald-400'}">${a.leave}</td>
+                        <td class="p-3 text-right text-slate-500">${a.lop}</td>
+                        <td class="p-3 text-right text-cyan-400 ${a.doublePay > 0 ? 'font-black' : ''}">${a.doublePay}</td>
                     </tr>
                 `;
             }).join('');
             
             document.getElementById('attHeadcount').innerText = `${filteredSheet3.length} Employees`;
-            document.getElementById('attTotalWO').innerText = `${totalWO.toFixed(1)} Days`;
-            document.getElementById('attTotalLeave').innerText = `${totalLeave.toFixed(1)} Days`;
-            document.getElementById('attTotalDoublePay').innerText = `${totalDoublePay.toFixed(1)} Units`;
+            document.getElementById('attTotalWO').innerText = `${totalWO} Days`;
+            document.getElementById('attTotalLeave').innerText = `${totalLeave} Days`;
+            document.getElementById('attTotalDoublePay').innerText = `${totalDoublePay} Units`;
         }
 
         function generateSheet4AllowanceTableRows() {
@@ -682,7 +700,7 @@
                 
                 return `
                     <tr class="hover:bg-slate-900/40 transition-colors">
-                        <td class="p-3">| ${al.team}</td>
+                        <td class="p-3 text-slate-400">${al.team || 'Elite'}</td>
                         <td class="p-3 font-bold text-cyan-400">${al.empId}</td>
                         <td class="p-3 text-white font-bold">${al.empName}</td>
                         <td class="p-3 text-center ${al.nightShifts > 0 ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${al.nightShifts || '0'}</td>
