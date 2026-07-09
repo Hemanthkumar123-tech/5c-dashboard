@@ -56,7 +56,6 @@
     <div id="loginPortalGate" class="fixed inset-0 bg-[#050814] z-[100] flex items-center justify-center p-4">
         <div class="ai-card-3d max-w-sm w-full p-6 bg-gradient-to-b from-[#0a1024] to-[#050814] border border-blue-500/30 shadow-[0_0_50px_rgba(0,240,255,0.1)]">
             <div class="text-center mb-6">
-                <img src="5CImage.avif" alt="5C Logo" class="h-12 mx-auto bg-slate-900 p-1.5 rounded-xl border border-blue-500/20 mb-3">
                 <h2 class="text-md font-black uppercase tracking-widest text-white">Secure Access Gateway</h2>
                 <p class="text-[10px] text-cyan-400 font-mono mt-1">5C Operational Command Node</p>
             </div>
@@ -80,7 +79,6 @@
         <header class="border-b border-slate-800/80 bg-[#070b19]/80 p-4 sticky top-0 z-50 backdrop-blur-xl shadow-lg">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center space-x-4">
-                    <img src="5CImage.avif" alt="5C Logo" class="h-10 w-auto object-contain bg-slate-900 p-1 rounded-xl border border-blue-500/30">
                     <div>
                         <h1 class="text-xl font-black tracking-wider text-white uppercase flex items-center gap-2">
                             Elite Operations <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Secured Node</span>
@@ -128,6 +126,7 @@
         </div>
 
         <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+            
             <div id="tab-focus-deck" class="tab-content space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div class="ai-card-3d p-5">
@@ -366,7 +365,6 @@
                 document.getElementById('loadingOverlay').classList.remove('hidden');
                 runCloudMatrixDataPipeline();
                 
-                // Automatic background reload loop tracking every 5 minutes (300000 ms)
                 setInterval(() => {
                     console.log("Automatic Data Synchronization Executing...");
                     runCloudMatrixDataPipeline(true); 
@@ -377,6 +375,7 @@
         }
 
         const SPREADSHEET_ID = '1owZflVI7knDPKJaPc8RshAwGRlP3kP4qRdGydK8_vu0';
+        
         const URL_SHEET1 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet1`;
         const URL_SHEET2 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet2`;
         const URL_SHEET3 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet3`;
@@ -404,7 +403,7 @@
             if (val === 'CV') return `<span class="badge-cv">CV</span>`;
             if (val.includes('LEAVE')) return `<span class="badge-leave">Leave</span>`;
             if (val === 'CO' || val.includes('COMP')) return `<span class="badge-co">CO</span>`;
-            return cellValue;
+            return cellValue; 
         }
 
         async function runCloudMatrixDataPipeline(isBackgroundRefresh = false) {
@@ -420,14 +419,14 @@
                     fetch(URL_SHEET4)
                 ]);
                 
-                if(!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error("Network proxy drop.");
+                if(!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error("Data fetching pipeline failed.");
                 
                 const data1 = await res1.json();
                 const data2 = await res2.json();
                 const data3 = await res3.json();
                 const data4 = await res4.json();
 
-                // Process Sheet 1 (Master Ledger)
+                // Process Sheet 1 (Core Ledger Metrics)
                 originalSheet1Pool = data1.map(e => ({
                     name: e.client_name || "Unknown Provider Hub",
                     volume: Number(e.case_load) || 0,
@@ -449,7 +448,7 @@
                     techit: `${e.technical_head_name || 'N/A'} / IT: ${e.it_head_name || 'N/A'}`
                 }));
 
-                // Process Sheet 2 (Rework Audits)
+                // Process Sheet 2 (Quality & Rework Audit Streams)
                 originalSheet2Pool = data2.map(e => ({
                     clientName: e.client_name || "Unknown Center",
                     caseNum: e.case_number || "CN-UNKNOWN",
@@ -463,10 +462,10 @@
                     severity: e.severity_level || "Low"
                 }));
 
-                // Process Sheet 3 (Attendance Grid) - Dynamic Multi-header Skimming
-                originalSheet3Pool = data3.slice(1).map(e => {
-                    let teamVal = e["Team"] || e["Unnamed: 0"] || "Elite";
-                    let empIdVal = e["Emp ID"] || e["Unnamed: 1"] || "-";
+                // Process Sheet 3 (Roster Performance Grid) - Adaptive Header Scanning Configuration
+                originalSheet3Pool = data3.map(e => {
+                    let teamVal = e["Team"] || e["Unnamed: 0"] || "";
+                    let empIdVal = e["Emp ID"] || e["Unnamed: 1"] || "";
                     let empNameVal = e["Emp Name"] || e["Unnamed: 2"] || "";
 
                     let woVal = Number(e["WO"]) || 0;
@@ -480,8 +479,8 @@
                     };
 
                     return {
-                        team: teamVal === "Team" ? "Elite" : teamVal,
-                        empId: empIdVal === "Emp ID" ? "-" : empIdVal,
+                        team: teamVal,
+                        empId: empIdVal,
                         empName: empNameVal,
                         d0525: getDateStr("05-25"), d0526: getDateStr("05-26"), d0527: getDateStr("05-27"), d0528: getDateStr("05-28"), d0529: getDateStr("05-29"), d0530: getDateStr("05-30"), d0531: getDateStr("05-31"),
                         d0601: getDateStr("06-01"), d0602: getDateStr("06-02"), d0603: getDateStr("06-03"), d0604: getDateStr("06-04"), d0605: getDateStr("06-05"), d0606: getDateStr("06-06"), d0607: getDateStr("06-07"),
@@ -490,24 +489,29 @@
                         d0622: getDateStr("06-22"), d0623: getDateStr("06-23"), d0624: getDateStr("06-24"),
                         wo: woVal, leave: leaveVal, lop: lopVal, doublePay: doublePayVal
                     };
-                }).filter(i => i.empName && i.empId !== "-" && !i.team.includes("Team") && !i.empName.includes("Grand Total"));
+                }).filter(i => i.empName && i.empId && !i.empId.toString().includes("Emp ID") && !i.empName.toString().includes("Emp Name") && !i.empName.toString().includes("Grand Total"));
 
-                // Process Sheet 4 (Allowances Matrix) - Structural Skimming Index Shifts
-                originalSheet4Pool = data4.slice(2).map(e => {
+                // Process Sheet 4 (Allowances Ledger Grid Matrix)
+                originalSheet4Pool = data4.map(e => {
+                    let teamVal = e["Team"] || e["Unnamed: 0"] || "";
+                    let empIdVal = e["Emp ID"] || e["Unnamed: 1"] || "";
+                    let empNameVal = e["Emp Name"] || e["Unnamed: 2"] || "";
+                    
+                    let nightShifts = Number(e["Night Shift"] || e["Unnamed: 3"]) || 0;
+                    let nightAmount = Number(e["Unnamed: 4"]) || 0;
+                    let sundayShifts = Number(e["Sunday"] || e["Unnamed: 5"]) || 0;
+                    let sundayAmount = Number(e["Unnamed: 6"]) || 0;
+                    let grandAllowance = Number(e["Grand Total"] || e["Unnamed: 7"]) || 0;
+                    let otHours = Number(e["OT - No. Hrs"] || e["Unnamed: 8"]) || 0;
+                    let otPayout = Number(e["OT Amount"] || e["Unnamed: 9"]) || 0;
+                    let finalGrandTotal = Number(e["Final Grand Total "] || e["Unnamed: 10"]) || 0;
+
                     return {
-                        team: e["Unnamed: 0"] || "Elite",
-                        empId: e["Unnamed: 1"] || "-",
-                        empName: e["Unnamed: 2"] || "Unknown",
-                        nightShifts: Number(e["Unnamed: 3"]) || 0,
-                        nightAmount: Number(e["Unnamed: 4"]) || 0,
-                        sundayShifts: Number(e["Unnamed: 5"]) || 0,
-                        sundayAmount: Number(e["Unnamed: 6"]) || 0,
-                        grandAllowance: Number(e["Unnamed: 7"]) || 0,
-                        otHours: Number(e["Unnamed: 8"]) || 0,
-                        otPayout: Number(e["Unnamed: 9"]) || 0,
-                        finalGrandTotal: Number(e["Unnamed: 10"]) || 0
+                        team: teamVal, empId: empIdVal, empName: empNameVal,
+                        nightShifts, nightAmount, sundayShifts, sundayAmount,
+                        grandAllowance, otHours, otPayout, finalGrandTotal
                     };
-                }).filter(i => i.empName && i.empId !== "-" && !i.team.includes("Team") && !i.empName.includes("Unknown") && !i.empName.includes("Grand Total"));
+                }).filter(i => i.empName && i.empId && !i.empId.toString().includes("Emp ID") && !i.empName.toString().includes("Emp Name") && !i.empName.toString().includes("Grand Total") && !i.empName.toString().includes("Allowance for the month"));
 
                 document.getElementById('loadingOverlay').classList.add('hidden');
                 resetDataFilterPools();
@@ -700,7 +704,7 @@
                 
                 return `
                     <tr class="hover:bg-slate-900/40 transition-colors">
-                        <td class="p-3 text-slate-400">${al.team || 'Elite'}</td>
+                        <td class="p-3 text-slate-400">${al.team || '-'}</td>
                         <td class="p-3 font-bold text-cyan-400">${al.empId}</td>
                         <td class="p-3 text-white font-bold">${al.empName}</td>
                         <td class="p-3 text-center ${al.nightShifts > 0 ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${al.nightShifts || '0'}</td>
