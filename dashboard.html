@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5C Network - Secure AI Control Ledger</title>
+    <title>5C Network - Elite Operations Control Ledger</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -45,7 +45,6 @@
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; border: 1px solid var(--border-cyber); }
         ::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); }
 
-        /* Attendance Registry Status Badges */
         .badge-wo { background: rgba(138, 153, 173, 0.2); color: #8a99ad; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
         .badge-cv { background: rgba(0, 240, 255, 0.2); color: var(--neon-blue); padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
         .badge-leave { background: rgba(255, 0, 85, 0.2); color: var(--neon-red); padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
@@ -57,7 +56,7 @@
     <div id="loginPortalGate" class="fixed inset-0 bg-[#050814] z-[100] flex items-center justify-center p-4">
         <div class="ai-card-3d max-w-sm w-full p-6 bg-gradient-to-b from-[#0a1024] to-[#050814] border border-blue-500/30 shadow-[0_0_50px_rgba(0,240,255,0.1)]">
             <div class="text-center mb-6">
-                <img src="5CImage.avif" alt="5C Network Logo" class="h-12 mx-auto bg-slate-900 p-1.5 rounded-xl border border-blue-500/20 mb-3">
+                <img src="5CImage.avif" alt="5C Logo" class="h-12 mx-auto bg-slate-900 p-1.5 rounded-xl border border-blue-500/20 mb-3">
                 <h2 class="text-md font-black uppercase tracking-widest text-white">Secure Access Gateway</h2>
                 <p class="text-[10px] text-cyan-400 font-mono mt-1">5C Operational Command Node</p>
             </div>
@@ -81,20 +80,20 @@
         <header class="border-b border-slate-800/80 bg-[#070b19]/80 p-4 sticky top-0 z-50 backdrop-blur-xl shadow-lg">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center space-x-4">
-                    <img src="5CImage.avif" alt="5C Network Logo" class="h-10 w-auto object-contain bg-slate-900 p-1 rounded-xl border border-blue-500/30">
+                    <img src="5CImage.avif" alt="5C Logo" class="h-10 w-auto object-contain bg-slate-900 p-1 rounded-xl border border-blue-500/30">
                     <div>
                         <h1 class="text-xl font-black tracking-wider text-white uppercase flex items-center gap-2">
-                            5C Cybernetic Control Ledger <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Secured Node</span>
+                            Elite Operations <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Secured Node</span>
                         </h1>
                         <p class="text-xs text-slate-400">Multi-Tab Encryption Tunnel Active</p>
                     </div>
                 </div>
                 
                 <nav class="flex bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 shadow-inner overflow-x-auto max-w-full">
-                    <button onclick="switchTab('focus-deck')" id="btn-focus-deck" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md whitespace-nowrap">Infrastructure Engine</button>
-                    <button onclick="switchTab('rework-deck')" id="btn-rework-deck" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">Rework Matrix Room</button>
-                    <button onclick="switchTab('master-ledger')" id="btn-master-ledger" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">System Ledgers</button>
-                    <button onclick="switchTab('attendance-deck')" id="btn-attendance-deck" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">📅 Attendance Registry</button>
+                    <button onclick="switchTab('focus-deck')" id="btn-focus-deck" class="px-3 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md whitespace-nowrap">Infrastructure Engine</button>
+                    <button onclick="switchTab('rework-deck')" id="btn-rework-deck" class="px-3 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">Rework Matrix Room</button>
+                    <button onclick="switchTab('master-ledger')" id="btn-master-ledger" class="px-3 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">System Ledgers</button>
+                    <button onclick="switchTab('attendance-deck')" id="btn-attendance-deck" class="px-3 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">📅 Attendance Registry</button>
                 </nav>
             </div>
         </header>
@@ -129,7 +128,6 @@
         </div>
 
         <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
-            <!-- INFRASTRUCTURE ENGINE TAB -->
             <div id="tab-focus-deck" class="tab-content space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div class="ai-card-3d p-5">
@@ -150,7 +148,7 @@
                     <div class="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
                     
                     <div class="space-y-3 md:border-r border-slate-800/80 md:pr-4">
-                        <span class="text-xs font-bold uppercase text-cyan-400 tracking-wider flex items-center gap-1">⚡ Node Infrastructure</span>
+                        <span class="text-xs font-bold uppercase text-cyan-400 tracking-wider flex items-center gap-1">Clients</span>
                         <select id="clientSelector" onchange="syncSelectedClientMetadata(this.value)" class="w-full bg-black/60 text-white font-bold rounded-xl px-3 py-2 text-xs border border-slate-800 focus:outline-none focus:border-cyan-400 cursor-pointer"></select>
                         <div>
                             <p class="text-[10px] text-slate-500 font-bold uppercase">Physical Hub Coordinates</p>
@@ -208,7 +206,6 @@
                 </section>
             </div>
 
-            <!-- REWORK MATRIX TAB -->
             <div id="tab-rework-deck" class="tab-content hidden space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                     <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Filtered Reworks</span><p id="rwTotal" class="text-2xl font-black neon-text-purple mt-1">0</p></div>
@@ -243,7 +240,6 @@
                 </section>
             </div>
 
-            <!-- SYSTEM LEDGERS TAB -->
             <div id="tab-master-ledger" class="tab-content hidden">
                 <section class="ai-card-3d overflow-hidden">
                     <div class="p-4 border-b border-slate-800 bg-slate-900/50 flex justify-between items-center">
@@ -270,27 +266,25 @@
                 </section>
             </div>
 
-            <!-- ATTENDANCE REGISTRY TAB -->
             <div id="tab-attendance-deck" class="tab-content hidden space-y-6">
                 <div class="flex justify-between items-center bg-slate-900/80 p-2 rounded-xl border border-slate-800/80">
                     <div class="flex space-x-2">
-                        <button onclick="switchAttendanceSubTab('sheet3')" id="btn-sub-sheet3" class="px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-                            📊 Sheet 3: Roster Attendance Tracker
+                        <button onclick="switchAttendanceSubTab('sheet1')" id="btn-sub-sheet1" class="px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                            📊 Roster Attendance Tracker (Sheet 3)
                         </button>
-                        <button onclick="switchAttendanceSubTab('sheet4')" id="btn-sub-sheet4" class="px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white">
-                            💰 Sheet 4: Allowance & OT Matrix
+                        <button onclick="switchAttendanceSubTab('sheet2')" id="btn-sub-sheet2" class="px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white">
+                            💰 Allowance & OT Matrix (Sheet 4)
                         </button>
                     </div>
-                    <span class="text-[10px] font-mono text-slate-500 pr-2 uppercase">Dynamic Roster Feed</span>
+                    <span class="text-[10px] font-mono text-slate-500 pr-2 uppercase">May - June 2026 Cycle</span>
                 </div>
 
-                <!-- SUB TAB: SHEET 3 -->
-                <div id="attendance-sub-sheet3" class="space-y-6">
+                <div id="attendance-sub-sheet1" class="space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Roster Headcount</span><p id="s3Headcount" class="text-2xl font-black neon-text-blue mt-1">0 Employees</p></div>
-                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Week-Offs Mapped</span><p id="s3Weekoffs" class="text-2xl font-black neon-text-purple mt-1">0 Days</p></div>
-                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Active Approved Leaves</span><p id="s3Leaves" class="text-2xl font-black neon-text-green mt-1">0.0 Days</p></div>
-                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Premium Double Pay Units</span><p id="s3DoublePay" class="text-2xl font-black neon-text-red mt-1">0.0 Units</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Roster Headcount</span><p id="attHeadcount" class="text-2xl font-black neon-text-blue mt-1">0 Employees</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Week-Offs Mapped</span><p id="attTotalWO" class="text-2xl font-black neon-text-purple mt-1">0 Days</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Active Approved Leaves</span><p id="attTotalLeave" class="text-2xl font-black neon-text-green mt-1">0 Days</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Premium Double Pay Units</span><p id="attTotalDoublePay" class="text-2xl font-black neon-text-red mt-1">0 Units</p></div>
                     </div>
 
                     <section class="ai-card-3d border border-cyan-500/20 overflow-hidden">
@@ -299,24 +293,34 @@
                         </div>
                         <div class="overflow-x-auto max-w-full">
                             <table class="w-full text-left border-collapse font-mono text-xs">
-                                <thead id="attendanceTableHeader" class="sticky top-0 bg-[#070b19] border-b border-slate-800 text-slate-400 whitespace-nowrap z-10">
-                                    <!-- Dynamic Columns Generated via JavaScript Pipeline -->
+                                <thead class="sticky top-0 bg-[#070b19] border-b border-slate-800 text-slate-400 whitespace-nowrap z-10">
+                                    <tr class="text-[11px]">
+                                        <th class="p-3">Team</th>
+                                        <th class="p-3">Emp ID</th>
+                                        <th class="p-3">Employee Name</th>
+                                        <th class="p-2">05-25</th><th class="p-2">05-26</th><th class="p-2">05-27</th><th class="p-2">05-28</th><th class="p-2">05-29</th><th class="p-2">05-30</th><th class="p-2">05-31</th>
+                                        <th class="p-2">06-01</th><th class="p-2">06-02</th><th class="p-2">06-03</th><th class="p-2">06-04</th><th class="p-2">06-05</th><th class="p-2">06-06</th><th class="p-2">06-07</th>
+                                        <th class="p-2">06-08</th><th class="p-2">06-09</th><th class="p-2">06-10</th><th class="p-2">06-11</th><th class="p-2">06-12</th><th class="p-2">06-13</th><th class="p-2">06-14</th>
+                                        <th class="p-2">06-15</th><th class="p-2">06-16</th><th class="p-2">06-17</th><th class="p-2">06-18</th><th class="p-2">06-19</th><th class="p-2">06-20</th><th class="p-2">06-21</th>
+                                        <th class="p-2">06-22</th><th class="p-2">06-23</th><th class="p-2">06-24</th>
+                                        <th class="p-3 text-right">WO</th>
+                                        <th class="p-3 text-right">Leave</th>
+                                        <th class="p-3 text-right">LOP</th>
+                                        <th class="p-3 text-right">Double Pay</th>
+                                    </tr>
                                 </thead>
-                                <tbody id="attendanceTableBody" class="divide-y divide-slate-900 whitespace-nowrap text-slate-300">
-                                    <!-- Dynamic Excel Entries stream here -->
-                                </tbody>
+                                <tbody id="attendanceTableBody" class="divide-y divide-slate-900 whitespace-nowrap text-slate-300"></tbody>
                             </table>
                         </div>
                     </section>
                 </div>
 
-                <!-- SUB TAB: SHEET 4 -->
-                <div id="attendance-sub-sheet4" class="space-y-6 hidden">
+                <div id="attendance-sub-sheet2" class="space-y-6 hidden">
                     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Shift Allowances</span><p id="s4Allowances" class="text-2xl font-black neon-text-green mt-1">₹0</p></div>
-                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Cumulative OT Hours</span><p id="s4OTHours" class="text-2xl font-black neon-text-purple mt-1">0 Hrs</p></div>
-                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Overtime Payout</span><p id="s4OTPayout" class="text-2xl font-black neon-text-blue mt-1">₹0</p></div>
-                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Final Budget Ledger</span><p id="s4GrandTotal" class="text-2xl font-black neon-text-red mt-1">₹0</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Shift Allowances</span><p id="alTotalShift" class="text-2xl font-black neon-text-green mt-1">₹0</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Cumulative OT Hours</span><p id="alTotalOTHours" class="text-2xl font-black neon-text-purple mt-1">0 Hrs</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Overtime Payout</span><p id="alTotalOTPayout" class="text-2xl font-black neon-text-blue mt-1">₹0</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Final Budget Ledger</span><p id="alGrandBudget" class="text-2xl font-black neon-text-red mt-1">₹0</p></div>
                     </div>
 
                     <section class="ai-card-3d border border-purple-500/20 overflow-hidden">
@@ -340,9 +344,7 @@
                                         <th class="p-3 text-right font-bold text-emerald-400">Final Grand Total</th>
                                     </tr>
                                 </thead>
-                                <tbody id="allowanceTableBody" class="divide-y divide-slate-900 whitespace-nowrap text-slate-300">
-                                    <!-- Dynamic Excel Entries stream here -->
-                                </tbody>
+                                <tbody id="allowanceTableBody" class="divide-y divide-slate-900 whitespace-nowrap text-slate-300"></tbody>
                             </table>
                         </div>
                     </section>
@@ -363,6 +365,12 @@
                 document.getElementById('dashboardAppCore').classList.remove('hidden');
                 document.getElementById('loadingOverlay').classList.remove('hidden');
                 runCloudMatrixDataPipeline();
+                
+                // Initialize background automatic refreshing every 5 minutes (300000ms)
+                setInterval(() => {
+                    console.log("Automatic Data Synchronization Executing...");
+                    runCloudMatrixDataPipeline(true); 
+                }, 300000);
             } else {
                 errorLabel.classList.remove('hidden');
             }
@@ -374,28 +382,42 @@
         const URL_SHEET3 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet3`;
         const URL_SHEET4 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet4`;
 
-        let originalSheet1Pool = [], originalSheet2Pool = [], originalSheet3Pool = [], originalSheet4Pool = [];
-        let filteredSheet1 = [], filteredSheet2 = [], filteredSheet3 = [], filteredSheet4 = [];
+        let originalSheet1Pool = [];
+        let originalSheet2Pool = [];
+        let originalSheet3Pool = [];
+        let originalSheet4Pool = [];
+        
+        let filteredSheet1 = [];
+        let filteredSheet2 = [];
+        let filteredSheet3 = [];
+        let filteredSheet4 = [];
         let gV, gB, gR;
 
         function formatCurrency(val) {
             return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(val);
         }
 
-        function buildStatusBadge(value) {
-            if (!value) return '';
-            const normalized = value.toString().toUpperCase().trim();
-            if (normalized === 'WO') return `<span class="badge-wo">WO</span>`;
-            if (normalized === 'CV') return `<span class="badge-cv">CV</span>`;
-            if (normalized === 'LEAVE' || normalized === 'L') return `<span class="badge-leave">Leave</span>`;
-            if (normalized === 'CO') return `<span class="badge-co">CO</span>`;
-            return value;
+        function buildStatusBadge(cellValue) {
+            if (!cellValue) return '';
+            const val = cellValue.trim().toUpperCase();
+            if (val === 'WO') return `<span class="badge-wo">WO</span>`;
+            if (val === 'CV') return `<span class="badge-cv">CV</span>`;
+            if (val === 'LEAVE') return `<span class="badge-leave">Leave</span>`;
+            if (val === 'CO') return `<span class="badge-co">CO</span>`;
+            return cellValue;
         }
 
-        async function runCloudMatrixDataPipeline() {
+        async function runCloudMatrixDataPipeline(isBackgroundRefresh = false) {
             try {
+                if (!isBackgroundRefresh) {
+                    document.getElementById('loadingOverlay').classList.remove('hidden');
+                }
+                
                 const [res1, res2, res3, res4] = await Promise.all([
-                    fetch(URL_SHEET1), fetch(URL_SHEET2), fetch(URL_SHEET3), fetch(URL_SHEET4)
+                    fetch(URL_SHEET1), 
+                    fetch(URL_SHEET2),
+                    fetch(URL_SHEET3),
+                    fetch(URL_SHEET4)
                 ]);
                 
                 if(!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error("Network proxy drop.");
@@ -439,22 +461,33 @@
                     severity: e.severity_level || "Low"
                 }));
 
-                // Process Sheet 3 Data dynamically from Excel 
-                originalSheet3Pool = data3;
+                originalSheet3Pool = data3.map(e => ({
+                    team: e.Team || e.team || "Elite",
+                    empId: e["Emp ID"] || e.emp_id || "-",
+                    empName: e["Employee Name"] || e.employee_name || "Unknown",
+                    d0525: e["05-25"] || "", d0526: e["05-26"] || "", d0527: e["05-27"] || "", d0528: e["05-28"] || "", d0529: e["05-29"] || "", d0530: e["05-30"] || "", d0531: e["05-31"] || "",
+                    d0601: e["06-01"] || "", d0602: e["06-02"] || "", d0603: e["06-03"] || "", d0604: e["06-04"] || "", d0605: e["06-05"] || "", d0606: e["06-06"] || "", d0607: e["06-07"] || "",
+                    d0608: e["06-08"] || "", d0609: e["06-09"] || "", d0610: e["06-10"] || "", d0611: e["06-11"] || "", d0612: e["06-12"] || "", d0613: e["06-13"] || "", d0614: e["06-14"] || "",
+                    d0615: e["06-15"] || "", d0616: e["06-16"] || "", d0617: e["06-17"] || "", d0618: e["06-18"] || "", d0619: e["06-19"] || "", d0620: e["06-20"] || "", d0621: e["06-21"] || "",
+                    d0622: e["06-22"] || "", d0623: e["06-23"] || "", d0624: e["06-24"] || "",
+                    wo: Number(e.WO) || Number(e.wo) || 0,
+                    leave: Number(e.Leave) || Number(e.leave) || 0,
+                    lop: Number(e.LOP) || Number(e.lop) || 0,
+                    doublePay: Number(e["Double Pay"]) || Number(e.double_pay) || 0
+                }));
 
-                // Process Sheet 4 Data dynamically from Excel
                 originalSheet4Pool = data4.map(e => ({
-                    team: e.team || "Elite",
-                    empId: e.emp_id || "N/A",
-                    name: e.employee_name || "Unknown",
-                    nightShifts: Number(e.night_shifts) || 0,
-                    nightAmount: Number(e.night_amount) || 0,
-                    sundayShifts: Number(e.sunday_shifts) || 0,
-                    sundayAmount: Number(e.sunday_amount) || 0,
-                    grandAllowance: Number(e.grand_allowance) || 0,
-                    otHours: Number(e.ot_hours) || 0,
-                    otPayout: Number(e.ot_payout) || 0,
-                    finalTotal: Number(e.final_grand_total) || 0
+                    team: e.Team || e.team || "Elite",
+                    empId: e["Emp ID"] || e.emp_id || "-",
+                    empName: e["Employee Name"] || e.employee_name || "Unknown",
+                    nightShifts: Number(e["Night Shifts"]) || Number(e.night_shifts) || 0,
+                    nightAmount: Number(e["Night Amount"]) || Number(e.night_amount) || 0,
+                    sundayShifts: Number(e["Sunday Shifts"]) || Number(e.sunday_shifts) || 0,
+                    sundayAmount: Number(e["Sunday Amount"]) || Number(e.sunday_amount) || 0,
+                    grandAllowance: Number(e["Grand Allowance"]) || Number(e.grand_allowance) || 0,
+                    otHours: Number(e["OT Hours"]) || Number(e.ot_hours) || 0,
+                    otPayout: Number(e["OT Payout"]) || Number(e.ot_payout) || 0,
+                    finalGrandTotal: Number(e["Final Grand Total"]) || Number(e.final_grand_total) || 0
                 }));
 
                 document.getElementById('loadingOverlay').classList.add('hidden');
@@ -480,7 +513,7 @@
 
         function executeOmniSearchFilter() {
             const query = document.getElementById('omniSearch').value.toLowerCase().trim();
-            
+
             if(!query) { resetDataFilterPools(); return; }
 
             filteredSheet1 = originalSheet1Pool.filter(c => 
@@ -495,14 +528,16 @@
                 r.severity.toLowerCase().includes(query)
             );
 
-            filteredSheet3 = originalSheet3Pool.filter(row => 
-                Object.values(row).some(val => String(val).toLowerCase().includes(query))
+            filteredSheet3 = originalSheet3Pool.filter(a => 
+                a.empName.toLowerCase().includes(query) ||
+                a.empId.toString().toLowerCase().includes(query) ||
+                a.team.toLowerCase().includes(query)
             );
 
-            filteredSheet4 = originalSheet4Pool.filter(e => 
-                e.name.toLowerCase().includes(query) || 
-                e.empId.toLowerCase().includes(query) || 
-                e.team.toLowerCase().includes(query)
+            filteredSheet4 = originalSheet4Pool.filter(al => 
+                al.empName.toLowerCase().includes(query) ||
+                al.empId.toString().toLowerCase().includes(query) ||
+                al.team.toLowerCase().includes(query)
             );
 
             renderDashboardVisualElements();
@@ -528,8 +563,10 @@
             generateSheet1TableRows();
             generateSheet2ReworkTableRows();
             calculateSheet2SummaryCountersBlock();
-            generateSheet3AttendanceRows();
-            generateSheet4AllowanceRows();
+            
+            // Generate Sheets 3 and Sheet 4 Rows
+            generateSheet3AttendanceTableRows();
+            generateSheet4AllowanceTableRows();
         }
 
         function syncSelectedClientMetadata(localFilterIndex) {
@@ -602,6 +639,70 @@
             `).join('');
         }
 
+        function generateSheet3AttendanceTableRows() {
+            let totalWO = 0, totalLeave = 0, totalDoublePay = 0;
+            
+            document.getElementById('attendanceTableBody').innerHTML = filteredSheet3.map(a => {
+                totalWO += a.wo;
+                totalLeave += a.leave;
+                totalDoublePay += a.doublePay;
+                
+                return `
+                    <tr class="hover:bg-slate-900/40 transition-colors">
+                        <td class="p-3">${a.team}</td>
+                        <td class="p-3 font-bold text-cyan-400">${a.empId}</td>
+                        <td class="p-3 text-white font-bold">${a.empName}</td>
+                        <td class="p-2">${buildStatusBadge(a.d0525)}</td><td class="p-2">${buildStatusBadge(a.d0526)}</td><td class="p-2">${buildStatusBadge(a.d0527)}</td><td class="p-2">${buildStatusBadge(a.d0528)}</td><td class="p-2">${buildStatusBadge(a.d0529)}</td><td class="p-2">${buildStatusBadge(a.d0530)}</td><td class="p-2">${buildStatusBadge(a.d0531)}</td>
+                        <td class="p-2">${buildStatusBadge(a.d0601)}</td><td class="p-2">${buildStatusBadge(a.d0602)}</td><td class="p-2">${buildStatusBadge(a.d0603)}</td><td class="p-2">${buildStatusBadge(a.d0604)}</td><td class="p-2">${buildStatusBadge(a.d0605)}</td><td class="p-2">${buildStatusBadge(a.d0606)}</td><td class="p-2">${buildStatusBadge(a.d0607)}</td>
+                        <td class="p-2">${buildStatusBadge(a.d0608)}</td><td class="p-2">${buildStatusBadge(a.d0609)}</td><td class="p-2">${buildStatusBadge(a.d0610)}</td><td class="p-2">${buildStatusBadge(a.d0611)}</td><td class="p-2">${buildStatusBadge(a.d0612)}</td><td class="p-2">${buildStatusBadge(a.d0613)}</td><td class="p-2">${buildStatusBadge(a.d0614)}</td>
+                        <td class="p-2">${buildStatusBadge(a.d0615)}</td><td class="p-2">${buildStatusBadge(a.d0616)}</td><td class="p-2">${buildStatusBadge(a.d0617)}</td><td class="p-2">${buildStatusBadge(a.d0618)}</td><td class="p-2">${buildStatusBadge(a.d0619)}</td><td class="p-2">${buildStatusBadge(a.d0620)}</td><td class="p-2">${buildStatusBadge(a.d0621)}</td>
+                        <td class="p-2">${buildStatusBadge(a.d0622)}</td><td class="p-2">${buildStatusBadge(a.d0623)}</td><td class="p-2">${buildStatusBadge(a.d0624)}</td>
+                        <td class="p-3 text-right text-purple-400 font-bold">${a.wo.toFixed(1)}</td>
+                        <td class="p-3 text-right ${a.leave > 0 ? 'text-rose-500 font-black' : 'text-emerald-400'}">${a.leave.toFixed(1)}</td>
+                        <td class="p-3 text-right text-slate-500">${a.lop.toFixed(1)}</td>
+                        <td class="p-3 text-right text-cyan-400 ${a.doublePay > 0 ? 'font-black' : ''}">${a.doublePay.toFixed(1)}</td>
+                    </tr>
+                `;
+            }).join('');
+            
+            document.getElementById('attHeadcount').innerText = `${filteredSheet3.length} Employees`;
+            document.getElementById('attTotalWO').innerText = `${totalWO.toFixed(1)} Days`;
+            document.getElementById('attTotalLeave').innerText = `${totalLeave.toFixed(1)} Days`;
+            document.getElementById('attTotalDoublePay').innerText = `${totalDoublePay.toFixed(1)} Units`;
+        }
+
+        function generateSheet4AllowanceTableRows() {
+            let totalShift = 0, totalOTHours = 0, totalOTPayout = 0, grandBudget = 0;
+            
+            document.getElementById('allowanceTableBody').innerHTML = filteredSheet4.map(al => {
+                totalShift += al.grandAllowance;
+                totalOTHours += al.otHours;
+                totalOTPayout += al.otPayout;
+                grandBudget += al.finalGrandTotal;
+                
+                return `
+                    <tr class="hover:bg-slate-900/40 transition-colors">
+                        <td class="p-3">| ${al.team}</td>
+                        <td class="p-3 font-bold text-cyan-400">${al.empId}</td>
+                        <td class="p-3 text-white font-bold">${al.empName}</td>
+                        <td class="p-3 text-center ${al.nightShifts > 0 ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${al.nightShifts || '0'}</td>
+                        <td class="p-3 text-right ${al.nightAmount > 0 ? '' : 'text-slate-500'}">${al.nightAmount > 0 ? formatCurrency(al.nightAmount) : '-'}</td>
+                        <td class="p-3 text-center ${al.sundayShifts > 0 ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${al.sundayShifts || '0'}</td>
+                        <td class="p-3 text-right ${al.sundayAmount > 0 ? '' : 'text-slate-500'}">${al.sundayAmount > 0 ? formatCurrency(al.sundayAmount) : '-'}</td>
+                        <td class="p-3 text-right text-purple-400 font-bold">${al.grandAllowance > 0 ? formatCurrency(al.grandAllowance) : '-'}</td>
+                        <td class="p-3 text-center ${al.otHours > 0 ? 'text-amber-400 font-bold' : 'text-slate-500'}">${al.otHours || '-'}</td>
+                        <td class="p-3 text-right ${al.otPayout > 0 ? 'text-amber-400' : 'text-slate-500'}">${al.otPayout > 0 ? formatCurrency(al.otPayout) : '-'}</td>
+                        <td class="p-3 text-right ${al.finalGrandTotal > 0 ? 'font-black text-emerald-400' : 'text-slate-500'}">${al.finalGrandTotal > 0 ? formatCurrency(al.finalGrandTotal) : '-'}</td>
+                    </tr>
+                `;
+            }).join('');
+            
+            document.getElementById('alTotalShift').innerText = formatCurrency(totalShift);
+            document.getElementById('alTotalOTHours').innerText = `${totalOTHours} Hrs`;
+            document.getElementById('alTotalOTPayout').innerText = formatCurrency(totalOTPayout);
+            document.getElementById('alGrandBudget').innerText = formatCurrency(grandBudget);
+        }
+
         function calculateSheet2SummaryCountersBlock() {
             document.getElementById('rwTotal').innerText = filteredSheet2.length;
             const oqcCount = filteredSheet2.filter(r => r.oqc.toLowerCase().includes('fail')).length;
@@ -613,95 +714,6 @@
             document.getElementById('rwAvgTAT').innerText = `${avgTat}m`;
         }
 
-        // Generate Sheet 3 dynamically mapping header titles and inputs out of Excel columns
-        function generateSheet3AttendanceRows() {
-            const headerContainer = document.getElementById('attendanceTableHeader');
-            const bodyContainer = document.getElementById('attendanceTableBody');
-            
-            if(filteredSheet3.length === 0) {
-                headerContainer.innerHTML = `<tr><th class="p-3 text-center">No Data Stored in Sheet 3</th></tr>`;
-                bodyContainer.innerHTML = `<tr><td class="p-6 text-center text-slate-500 italic">Enter team roster timelines inside Excel source to display grid...</td></tr>`;
-                document.getElementById('s3Headcount').innerText = "0 Employees";
-                document.getElementById('s3Weekoffs').innerText = "0 Days";
-                document.getElementById('s3Leaves').innerText = "0.0 Days";
-                document.getElementById('s3DoublePay').innerText = "0.0 Units";
-                return;
-            }
-
-            // Extract spreadsheet object keys to determine columns automatically
-            const columns = Object.keys(filteredSheet3[0]);
-            
-            // Build dynamic headers
-            headerContainer.innerHTML = `<tr class="text-[11px]">${columns.map(c => `<th class="p-3 uppercase tracking-wider">${c.replace('_',' ')}</th>`).join('')}</tr>`;
-            
-            // Render spreadsheet rows
-            let totalWO = 0, totalLeaves = 0, totalDP = 0;
-            bodyContainer.innerHTML = filteredSheet3.map(row => {
-                return `<tr class="hover:bg-slate-900/40 transition-colors">
-                    ${columns.map(col => {
-                        const val = row[col] || '';
-                        const normalized = val.toString().toUpperCase().trim();
-                        
-                        // Increment summary metrics dynamically based on cell checks
-                        if(col.toLowerCase() === 'wo' || normalized === 'WO') totalWO += (Number(val) || 1);
-                        if(col.toLowerCase() === 'leave' || normalized === 'LEAVE') totalLeaves += (Number(val) || 1);
-                        if(col.toLowerCase() === 'double_pay' || col.toLowerCase() === 'double pay') totalDP += Number(val) || 0;
-
-                        return `<td class="p-2 border-r border-slate-900/40">${buildStatusBadge(val)}</td>`;
-                    }).join('')}
-                </tr>`;
-            }).join('');
-
-            // Update top metrics block
-            document.getElementById('s3Headcount').innerText = `${filteredSheet3.length} Employees`;
-            document.getElementById('s3Weekoffs').innerText = `${totalWO} Days`;
-            document.getElementById('s3Leaves').innerText = `${totalLeaves.toFixed(1)} Days`;
-            document.getElementById('s3DoublePay').innerText = `${totalDP.toFixed(1)} Units`;
-        }
-
-        // Generate Sheet 4 dynamically using live calculation rows
-        function generateSheet4AllowanceRows() {
-            const bodyContainer = document.getElementById('allowanceTableBody');
-            
-            if (filteredSheet4.length === 0) {
-                bodyContainer.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500 italic">Enter payroll data inside Sheet 4 to populate financial allowance matrix...</td></tr>`;
-                document.getElementById('s4Allowances').innerText = "₹0";
-                document.getElementById('s4OTHours').innerText = "0 Hrs";
-                document.getElementById('s4OTPayout').innerText = "₹0";
-                document.getElementById('s4GrandTotal').innerText = "₹0";
-                return;
-            }
-
-            let grandAllowances = 0, cumulativeOT = 0, grandOTPayout = 0, ultimateBudget = 0;
-
-            bodyContainer.innerHTML = filteredSheet4.map(e => {
-                grandAllowances += e.grandAllowance;
-                cumulativeOT += e.otHours;
-                grandOTPayout += e.otPayout;
-                ultimateBudget += e.finalTotal;
-
-                return `<tr class="hover:bg-slate-900/40 transition-colors">
-                    <td class="p-3">${e.team}</td>
-                    <td class="p-3 font-bold text-cyan-400">${e.empId}</td>
-                    <td class="p-3 text-white font-bold">${e.name}</td>
-                    <td class="p-3 text-center ${e.nightShifts > 0 ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${e.nightShifts}</td>
-                    <td class="p-3 text-right">${e.nightAmount > 0 ? formatCurrency(e.nightAmount) : '-'}</td>
-                    <td class="p-3 text-center ${e.sundayShifts > 0 ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${e.sundayShifts}</td>
-                    <td class="p-3 text-right">${e.sundayAmount > 0 ? formatCurrency(e.sundayAmount) : '-'}</td>
-                    <td class="p-3 text-right text-purple-400 font-bold">${e.grandAllowance > 0 ? formatCurrency(e.grandAllowance) : '-'}</td>
-                    <td class="p-3 text-center text-amber-400 font-bold">${e.otHours > 0 ? e.otHours : '-'}</td>
-                    <td class="p-3 text-right text-amber-400">${e.otPayout > 0 ? formatCurrency(e.otPayout) : '-'}</td>
-                    <td class="p-3 text-right font-black text-emerald-400">${e.finalTotal > 0 ? formatCurrency(e.finalTotal) : '-'}</td>
-                </tr>`;
-            }).join('');
-
-            // Update Sheet 4 structural operational overview metrics
-            document.getElementById('s4Allowances').innerText = formatCurrency(grandAllowances);
-            document.getElementById('s4OTHours').innerText = `${cumulativeOT} Hrs`;
-            document.getElementById('s4OTPayout').innerText = formatCurrency(grandOTPayout);
-            document.getElementById('s4GrandTotal').innerText = formatCurrency(ultimateBudget);
-        }
-
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
@@ -709,27 +721,27 @@
             ['focus-deck', 'rework-deck', 'master-ledger', 'attendance-deck'].forEach(b => {
                 const btn = document.getElementById(`btn-${b}`);
                 if (b === tabId) {
-                    btn.className = "px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md whitespace-nowrap";
+                    btn.className = "px-3 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md whitespace-nowrap";
                 } else {
-                    btn.className = "px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap";
+                    btn.className = "px-3 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap";
                 }
             });
         }
 
         function switchAttendanceSubTab(subId) {
-            document.getElementById('attendance-sub-sheet3').classList.add('hidden');
-            document.getElementById('attendance-sub-sheet4').classList.add('hidden');
+            document.getElementById('attendance-sub-sheet1').classList.add('hidden');
+            document.getElementById('attendance-sub-sheet2').classList.add('hidden');
             document.getElementById(`attendance-sub-${subId}`).classList.remove('hidden');
 
-            const btn3 = document.getElementById('btn-sub-sheet3');
-            const btn4 = document.getElementById('btn-sub-sheet4');
+            const btn1 = document.getElementById('btn-sub-sheet1');
+            const btn2 = document.getElementById('btn-sub-sheet2');
 
-            if (subId === 'sheet3') {
-                btn3.className = "px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/30";
-                btn4.className = "px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white";
+            if (subId === 'sheet1') {
+                btn1.className = "px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/30";
+                btn2.className = "px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white";
             } else {
-                btn3.className = "px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white";
-                btn4.className = "px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-purple-500/20 text-purple-400 border border-purple-500/30";
+                btn1.className = "px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white";
+                btn2.className = "px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-purple-500/20 text-purple-400 border border-purple-500/30";
             }
         }
     </script>
