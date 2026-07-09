@@ -368,7 +368,7 @@
                 setInterval(() => {
                     console.log("Forcing cloud synchronization cycle...");
                     runCloudMatrixDataPipeline(true); 
-                }, 45000); // Polls every 45 seconds automatically
+                }, 45000);
             } else {
                 errorLabel.classList.remove('hidden');
             }
@@ -418,13 +418,11 @@
                     document.getElementById('loadingOverlay').classList.remove('hidden');
                 }
                 
-                // Absolute Cache-Buster String to strip proxy memory locks
-                const currentBuster = `?cb=${Date.now()}`;
                 const [res1, res2, res3, res4] = await Promise.all([
-                    fetch(`https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet1${currentBuster}`), 
-                    fetch(`https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet2${currentBuster}`),
-                    fetch(`https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet3${currentBuster}`),
-                    fetch(`https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet4${currentBuster}`)
+                    fetch(`https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet1`), 
+                    fetch(`https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet2`),
+                    fetch(`https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet3`),
+                    fetch(`https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet4`)
                 ]);
                 
                 if(!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error("Synchronization tunnel dropped packets.");
