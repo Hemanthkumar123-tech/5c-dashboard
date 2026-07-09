@@ -44,6 +44,12 @@
         ::-webkit-scrollbar-track { background: #050814; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; border: 1px solid var(--border-cyber); }
         ::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); }
+
+        /* Attendance Registry Status Badges */
+        .badge-wo { background: rgba(138, 153, 173, 0.2); color: #8a99ad; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+        .badge-cv { background: rgba(0, 240, 255, 0.2); color: var(--neon-blue); padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+        .badge-leave { background: rgba(255, 0, 85, 0.2); color: var(--neon-red); padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+        .badge-co { background: rgba(230, 162, 60, 0.2); color: #e6a23c; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
     </style>
 </head>
 <body class="min-h-screen antialiased pb-12">
@@ -84,10 +90,11 @@
                     </div>
                 </div>
                 
-                <nav class="flex bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 shadow-inner">
-                    <button onclick="switchTab('focus-deck')" id="btn-focus-deck" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md">Infrastructure Engine</button>
-                    <button onclick="switchTab('rework-deck')" id="btn-rework-deck" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white">Rework Matrix Room</button>
-                    <button onclick="switchTab('master-ledger')" id="btn-master-ledger" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white">System Ledgers</button>
+                <nav class="flex bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 shadow-inner overflow-x-auto max-w-full">
+                    <button onclick="switchTab('focus-deck')" id="btn-focus-deck" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md whitespace-nowrap">Infrastructure Engine</button>
+                    <button onclick="switchTab('rework-deck')" id="btn-rework-deck" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">Rework Matrix Room</button>
+                    <button onclick="switchTab('master-ledger')" id="btn-master-ledger" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">System Ledgers</button>
+                    <button onclick="switchTab('attendance-deck')" id="btn-attendance-deck" class="px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap">📅 Attendance Registry</button>
                 </nav>
             </div>
         </header>
@@ -97,7 +104,7 @@
                 <div class="flex flex-col md:flex-row items-center gap-4">
                     <div class="w-full relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-cyan-400 font-bold text-sm">AI COMMAND:</span>
-                        <input type="text" id="omniSearch" oninput="executeOmniSearchFilter()" placeholder="Type client name, case ID, radiologist, severity level, or month..." class="w-full bg-black/40 text-cyan-100 placeholder-slate-500 border border-slate-800 rounded-xl pl-28 pr-4 py-3 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-mono">
+                        <input type="text" id="omniSearch" oninput="executeOmniSearchFilter()" placeholder="Type client name, case ID, radiologist, severity level, or employee roster details..." class="w-full bg-black/40 text-cyan-100 placeholder-slate-500 border border-slate-800 rounded-xl pl-28 pr-4 py-3 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-mono">
                     </div>
                     <div class="flex gap-2 w-full md:w-auto shrink-0">
                         <div class="bg-black/40 px-4 py-3 rounded-xl border border-slate-800 text-center min-w-[100px]">
@@ -122,6 +129,7 @@
         </div>
 
         <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+            <!-- INFRASTRUCTURE ENGINE TAB -->
             <div id="tab-focus-deck" class="tab-content space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div class="ai-card-3d p-5">
@@ -200,6 +208,7 @@
                 </section>
             </div>
 
+            <!-- REWORK MATRIX TAB -->
             <div id="tab-rework-deck" class="tab-content hidden space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                     <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Filtered Reworks</span><p id="rwTotal" class="text-2xl font-black neon-text-purple mt-1">0</p></div>
@@ -234,6 +243,7 @@
                 </section>
             </div>
 
+            <!-- SYSTEM LEDGERS TAB -->
             <div id="tab-master-ledger" class="tab-content hidden">
                 <section class="ai-card-3d overflow-hidden">
                     <div class="p-4 border-b border-slate-800 bg-slate-900/50 flex justify-between items-center">
@@ -259,6 +269,85 @@
                     </div>
                 </section>
             </div>
+
+            <!-- ATTENDANCE REGISTRY TAB -->
+            <div id="tab-attendance-deck" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center bg-slate-900/80 p-2 rounded-xl border border-slate-800/80">
+                    <div class="flex space-x-2">
+                        <button onclick="switchAttendanceSubTab('sheet3')" id="btn-sub-sheet3" class="px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                            📊 Sheet 3: Roster Attendance Tracker
+                        </button>
+                        <button onclick="switchAttendanceSubTab('sheet4')" id="btn-sub-sheet4" class="px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white">
+                            💰 Sheet 4: Allowance & OT Matrix
+                        </button>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-500 pr-2 uppercase">Dynamic Roster Feed</span>
+                </div>
+
+                <!-- SUB TAB: SHEET 3 -->
+                <div id="attendance-sub-sheet3" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Roster Headcount</span><p id="s3Headcount" class="text-2xl font-black neon-text-blue mt-1">0 Employees</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Week-Offs Mapped</span><p id="s3Weekoffs" class="text-2xl font-black neon-text-purple mt-1">0 Days</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Active Approved Leaves</span><p id="s3Leaves" class="text-2xl font-black neon-text-green mt-1">0.0 Days</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Premium Double Pay Units</span><p id="s3DoublePay" class="text-2xl font-black neon-text-red mt-1">0.0 Units</p></div>
+                    </div>
+
+                    <section class="ai-card-3d border border-cyan-500/20 overflow-hidden">
+                        <div class="p-4 bg-cyan-950/20 border-b border-slate-800 flex justify-between items-center">
+                            <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Daily Roster Performance Grid</span>
+                        </div>
+                        <div class="overflow-x-auto max-w-full">
+                            <table class="w-full text-left border-collapse font-mono text-xs">
+                                <thead id="attendanceTableHeader" class="sticky top-0 bg-[#070b19] border-b border-slate-800 text-slate-400 whitespace-nowrap z-10">
+                                    <!-- Dynamic Columns Generated via JavaScript Pipeline -->
+                                </thead>
+                                <tbody id="attendanceTableBody" class="divide-y divide-slate-900 whitespace-nowrap text-slate-300">
+                                    <!-- Dynamic Excel Entries stream here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- SUB TAB: SHEET 4 -->
+                <div id="attendance-sub-sheet4" class="space-y-6 hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Shift Allowances</span><p id="s4Allowances" class="text-2xl font-black neon-text-green mt-1">₹0</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Cumulative OT Hours</span><p id="s4OTHours" class="text-2xl font-black neon-text-purple mt-1">0 Hrs</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Total Overtime Payout</span><p id="s4OTPayout" class="text-2xl font-black neon-text-blue mt-1">₹0</p></div>
+                        <div class="ai-card-3d p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Final Budget Ledger</span><p id="s4GrandTotal" class="text-2xl font-black neon-text-red mt-1">₹0</p></div>
+                    </div>
+
+                    <section class="ai-card-3d border border-purple-500/20 overflow-hidden">
+                        <div class="p-4 bg-purple-950/20 border-b border-slate-800 flex justify-between items-center">
+                            <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Allowance Credits & Overtime Multipliers Log</span>
+                        </div>
+                        <div class="overflow-x-auto max-w-full">
+                            <table class="w-full text-left border-collapse font-mono text-xs">
+                                <thead class="sticky top-0 bg-[#070b19] border-b border-slate-800 text-slate-400 whitespace-nowrap z-10">
+                                    <tr class="text-[11px]">
+                                        <th class="p-3">Team</th>
+                                        <th class="p-3">Emp ID</th>
+                                        <th class="p-3">Employee Name</th>
+                                        <th class="p-3 text-center">Night Shifts</th>
+                                        <th class="p-3 text-right">Night Amount</th>
+                                        <th class="p-3 text-center">Sunday Shifts</th>
+                                        <th class="p-3 text-right">Sunday Amount</th>
+                                        <th class="p-3 text-right text-purple-400">Grand Allowance</th>
+                                        <th class="p-3 text-center text-amber-400">OT Hours</th>
+                                        <th class="p-3 text-right text-amber-400">OT Payout</th>
+                                        <th class="p-3 text-right font-bold text-emerald-400">Final Grand Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="allowanceTableBody" class="divide-y divide-slate-900 whitespace-nowrap text-slate-300">
+                                    <!-- Dynamic Excel Entries stream here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -282,24 +371,39 @@
         const SPREADSHEET_ID = '1owZflVI7knDPKJaPc8RshAwGRlP3kP4qRdGydK8_vu0';
         const URL_SHEET1 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet1`;
         const URL_SHEET2 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet2`;
+        const URL_SHEET3 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet3`;
+        const URL_SHEET4 = `https://opensheet.elk.sh/${SPREADSHEET_ID}/Sheet4`;
 
-        let originalSheet1Pool = [];
-        let originalSheet2Pool = [];
-        let filteredSheet1 = [];
-        let filteredSheet2 = [];
+        let originalSheet1Pool = [], originalSheet2Pool = [], originalSheet3Pool = [], originalSheet4Pool = [];
+        let filteredSheet1 = [], filteredSheet2 = [], filteredSheet3 = [], filteredSheet4 = [];
         let gV, gB, gR;
 
         function formatCurrency(val) {
             return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(val);
         }
 
+        function buildStatusBadge(value) {
+            if (!value) return '';
+            const normalized = value.toString().toUpperCase().trim();
+            if (normalized === 'WO') return `<span class="badge-wo">WO</span>`;
+            if (normalized === 'CV') return `<span class="badge-cv">CV</span>`;
+            if (normalized === 'LEAVE' || normalized === 'L') return `<span class="badge-leave">Leave</span>`;
+            if (normalized === 'CO') return `<span class="badge-co">CO</span>`;
+            return value;
+        }
+
         async function runCloudMatrixDataPipeline() {
             try {
-                const [res1, res2] = await Promise.all([fetch(URL_SHEET1), fetch(URL_SHEET2)]);
-                if(!res1.ok || !res2.ok) throw new Error("Network proxy drop.");
+                const [res1, res2, res3, res4] = await Promise.all([
+                    fetch(URL_SHEET1), fetch(URL_SHEET2), fetch(URL_SHEET3), fetch(URL_SHEET4)
+                ]);
+                
+                if(!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error("Network proxy drop.");
                 
                 const data1 = await res1.json();
                 const data2 = await res2.json();
+                const data3 = await res3.json();
+                const data4 = await res4.json();
 
                 originalSheet1Pool = data1.map(e => ({
                     name: e.client_name || "Unknown Provider Hub",
@@ -335,6 +439,24 @@
                     severity: e.severity_level || "Low"
                 }));
 
+                // Process Sheet 3 Data dynamically from Excel 
+                originalSheet3Pool = data3;
+
+                // Process Sheet 4 Data dynamically from Excel
+                originalSheet4Pool = data4.map(e => ({
+                    team: e.team || "Elite",
+                    empId: e.emp_id || "N/A",
+                    name: e.employee_name || "Unknown",
+                    nightShifts: Number(e.night_shifts) || 0,
+                    nightAmount: Number(e.night_amount) || 0,
+                    sundayShifts: Number(e.sunday_shifts) || 0,
+                    sundayAmount: Number(e.sunday_amount) || 0,
+                    grandAllowance: Number(e.grand_allowance) || 0,
+                    otHours: Number(e.ot_hours) || 0,
+                    otPayout: Number(e.ot_payout) || 0,
+                    finalTotal: Number(e.final_grand_total) || 0
+                }));
+
                 document.getElementById('loadingOverlay').classList.add('hidden');
                 resetDataFilterPools();
 
@@ -351,11 +473,14 @@
         function resetDataFilterPools() {
             filteredSheet1 = [...originalSheet1Pool];
             filteredSheet2 = [...originalSheet2Pool];
+            filteredSheet3 = [...originalSheet3Pool];
+            filteredSheet4 = [...originalSheet4Pool];
             renderDashboardVisualElements();
         }
 
         function executeOmniSearchFilter() {
             const query = document.getElementById('omniSearch').value.toLowerCase().trim();
+            
             if(!query) { resetDataFilterPools(); return; }
 
             filteredSheet1 = originalSheet1Pool.filter(c => 
@@ -369,6 +494,17 @@
                 r.caseNum.toString().toLowerCase().includes(query) ||
                 r.severity.toLowerCase().includes(query)
             );
+
+            filteredSheet3 = originalSheet3Pool.filter(row => 
+                Object.values(row).some(val => String(val).toLowerCase().includes(query))
+            );
+
+            filteredSheet4 = originalSheet4Pool.filter(e => 
+                e.name.toLowerCase().includes(query) || 
+                e.empId.toLowerCase().includes(query) || 
+                e.team.toLowerCase().includes(query)
+            );
+
             renderDashboardVisualElements();
         }
 
@@ -392,6 +528,8 @@
             generateSheet1TableRows();
             generateSheet2ReworkTableRows();
             calculateSheet2SummaryCountersBlock();
+            generateSheet3AttendanceRows();
+            generateSheet4AllowanceRows();
         }
 
         function syncSelectedClientMetadata(localFilterIndex) {
@@ -475,18 +613,124 @@
             document.getElementById('rwAvgTAT').innerText = `${avgTat}m`;
         }
 
+        // Generate Sheet 3 dynamically mapping header titles and inputs out of Excel columns
+        function generateSheet3AttendanceRows() {
+            const headerContainer = document.getElementById('attendanceTableHeader');
+            const bodyContainer = document.getElementById('attendanceTableBody');
+            
+            if(filteredSheet3.length === 0) {
+                headerContainer.innerHTML = `<tr><th class="p-3 text-center">No Data Stored in Sheet 3</th></tr>`;
+                bodyContainer.innerHTML = `<tr><td class="p-6 text-center text-slate-500 italic">Enter team roster timelines inside Excel source to display grid...</td></tr>`;
+                document.getElementById('s3Headcount').innerText = "0 Employees";
+                document.getElementById('s3Weekoffs').innerText = "0 Days";
+                document.getElementById('s3Leaves').innerText = "0.0 Days";
+                document.getElementById('s3DoublePay').innerText = "0.0 Units";
+                return;
+            }
+
+            // Extract spreadsheet object keys to determine columns automatically
+            const columns = Object.keys(filteredSheet3[0]);
+            
+            // Build dynamic headers
+            headerContainer.innerHTML = `<tr class="text-[11px]">${columns.map(c => `<th class="p-3 uppercase tracking-wider">${c.replace('_',' ')}</th>`).join('')}</tr>`;
+            
+            // Render spreadsheet rows
+            let totalWO = 0, totalLeaves = 0, totalDP = 0;
+            bodyContainer.innerHTML = filteredSheet3.map(row => {
+                return `<tr class="hover:bg-slate-900/40 transition-colors">
+                    ${columns.map(col => {
+                        const val = row[col] || '';
+                        const normalized = val.toString().toUpperCase().trim();
+                        
+                        // Increment summary metrics dynamically based on cell checks
+                        if(col.toLowerCase() === 'wo' || normalized === 'WO') totalWO += (Number(val) || 1);
+                        if(col.toLowerCase() === 'leave' || normalized === 'LEAVE') totalLeaves += (Number(val) || 1);
+                        if(col.toLowerCase() === 'double_pay' || col.toLowerCase() === 'double pay') totalDP += Number(val) || 0;
+
+                        return `<td class="p-2 border-r border-slate-900/40">${buildStatusBadge(val)}</td>`;
+                    }).join('')}
+                </tr>`;
+            }).join('');
+
+            // Update top metrics block
+            document.getElementById('s3Headcount').innerText = `${filteredSheet3.length} Employees`;
+            document.getElementById('s3Weekoffs').innerText = `${totalWO} Days`;
+            document.getElementById('s3Leaves').innerText = `${totalLeaves.toFixed(1)} Days`;
+            document.getElementById('s3DoublePay').innerText = `${totalDP.toFixed(1)} Units`;
+        }
+
+        // Generate Sheet 4 dynamically using live calculation rows
+        function generateSheet4AllowanceRows() {
+            const bodyContainer = document.getElementById('allowanceTableBody');
+            
+            if (filteredSheet4.length === 0) {
+                bodyContainer.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500 italic">Enter payroll data inside Sheet 4 to populate financial allowance matrix...</td></tr>`;
+                document.getElementById('s4Allowances').innerText = "₹0";
+                document.getElementById('s4OTHours').innerText = "0 Hrs";
+                document.getElementById('s4OTPayout').innerText = "₹0";
+                document.getElementById('s4GrandTotal').innerText = "₹0";
+                return;
+            }
+
+            let grandAllowances = 0, cumulativeOT = 0, grandOTPayout = 0, ultimateBudget = 0;
+
+            bodyContainer.innerHTML = filteredSheet4.map(e => {
+                grandAllowances += e.grandAllowance;
+                cumulativeOT += e.otHours;
+                grandOTPayout += e.otPayout;
+                ultimateBudget += e.finalTotal;
+
+                return `<tr class="hover:bg-slate-900/40 transition-colors">
+                    <td class="p-3">${e.team}</td>
+                    <td class="p-3 font-bold text-cyan-400">${e.empId}</td>
+                    <td class="p-3 text-white font-bold">${e.name}</td>
+                    <td class="p-3 text-center ${e.nightShifts > 0 ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${e.nightShifts}</td>
+                    <td class="p-3 text-right">${e.nightAmount > 0 ? formatCurrency(e.nightAmount) : '-'}</td>
+                    <td class="p-3 text-center ${e.sundayShifts > 0 ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${e.sundayShifts}</td>
+                    <td class="p-3 text-right">${e.sundayAmount > 0 ? formatCurrency(e.sundayAmount) : '-'}</td>
+                    <td class="p-3 text-right text-purple-400 font-bold">${e.grandAllowance > 0 ? formatCurrency(e.grandAllowance) : '-'}</td>
+                    <td class="p-3 text-center text-amber-400 font-bold">${e.otHours > 0 ? e.otHours : '-'}</td>
+                    <td class="p-3 text-right text-amber-400">${e.otPayout > 0 ? formatCurrency(e.otPayout) : '-'}</td>
+                    <td class="p-3 text-right font-black text-emerald-400">${e.finalTotal > 0 ? formatCurrency(e.finalTotal) : '-'}</td>
+                </tr>`;
+            }).join('');
+
+            // Update Sheet 4 structural operational overview metrics
+            document.getElementById('s4Allowances').innerText = formatCurrency(grandAllowances);
+            document.getElementById('s4OTHours').innerText = `${cumulativeOT} Hrs`;
+            document.getElementById('s4OTPayout').innerText = formatCurrency(grandOTPayout);
+            document.getElementById('s4GrandTotal').innerText = formatCurrency(ultimateBudget);
+        }
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
 
-            ['focus-deck', 'rework-deck', 'master-ledger'].forEach(b => {
+            ['focus-deck', 'rework-deck', 'master-ledger', 'attendance-deck'].forEach(b => {
                 const btn = document.getElementById(`btn-${b}`);
                 if (b === tabId) {
-                    btn.className = "px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md";
+                    btn.className = "px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md whitespace-nowrap";
                 } else {
-                    btn.className = "px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white";
+                    btn.className = "px-4 py-2 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white whitespace-nowrap";
                 }
             });
+        }
+
+        function switchAttendanceSubTab(subId) {
+            document.getElementById('attendance-sub-sheet3').classList.add('hidden');
+            document.getElementById('attendance-sub-sheet4').classList.add('hidden');
+            document.getElementById(`attendance-sub-${subId}`).classList.remove('hidden');
+
+            const btn3 = document.getElementById('btn-sub-sheet3');
+            const btn4 = document.getElementById('btn-sub-sheet4');
+
+            if (subId === 'sheet3') {
+                btn3.className = "px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-cyan-500/20 text-cyan-400 border border-cyan-500/30";
+                btn4.className = "px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white";
+            } else {
+                btn3.className = "px-4 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all text-slate-400 hover:text-white";
+                btn4.className = "px-4 py-1.5 text-xs font-black rounded-lg cursor-pointer transition-all bg-purple-500/20 text-purple-400 border border-purple-500/30";
+            }
         }
     </script>
 </body>
